@@ -273,7 +273,23 @@ class LinkedList:
             value: the value to remove
         """
 
-        # FIXME: Write this function
+        cur = self.head
+        prev = None
+
+        while cur != self.tail:
+
+            # check each Node to see if it contains our target value
+            if cur.data == value:
+
+                # if the value is found we change prev.next to point to skip the
+                # current Node.
+                prev.next = cur.next
+                return
+
+            prev = cur
+            cur = cur.next
+
+        return
 
 
 '''
@@ -479,7 +495,8 @@ print(ml.get_back())
 print(ml.is_empty(), 'false')
 print(ml.contains('D'), 'false')
 print(ml.contains('C'), 'true')
-# ml.remove_link(-20)
+ml.remove_link(-20)
 ml.remove_front()
 ml.remove_back()
+ml.remove('A')
 print(ml.__str__())
