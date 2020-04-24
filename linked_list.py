@@ -64,6 +64,8 @@ class LinkedList:
             index: The index of the node that will immediately follow the newly
             added node
         """
+
+        # if the index is less than 0 raise range exception
         if index < 0:
             raise Exception('Index out of range')
 
@@ -103,10 +105,29 @@ class LinkedList:
         """
         Removes the link at the location specified by index
         Args:
-            Index: The index of the node that will be removed
+            index: The index of the node that will be removed
         """
 
-        # FIXME: Write this function
+        # if the index is less than 0 raise range exception
+        if index < 0:
+            raise Exception('Index out of range')
+
+        cur = self.head
+        prev = None
+
+        if index == 0:
+            self.head.next = cur.next
+
+        # go through the linked list until we find the specified index
+        for number in range(index + 1):
+            # if cur ever becomes the tail sentinel we raise a range exception
+            if cur == self.tail:
+                raise Exception('Index out of range')
+            prev = cur
+            cur = cur.next
+
+        # I don't delete my own Nodes, I have people for that, or... python.
+        prev.next = cur.next
 
     def add_front(self, data):
         """
@@ -408,4 +429,8 @@ print(ml.__str__())
 # ml.add_link_before(44, 20)
 ml.add_front('A')
 ml.add_back('A')
+print(ml.__str__())
+ml.remove_link(1)
+ml.remove_link(0)
+# ml.remove_link(-20)
 print(ml.__str__())
