@@ -203,14 +203,30 @@ class LinkedList:
         Removes the first element of the list. Will not remove the tail.
         """
 
-        # FIXME: Write this function
+        # if the list is empty nothing happens.
+        if self.head.next == self.tail:
+            return
+
+        # change the next data members to point to skip the first Node
+        cur = self.head.next
+        self.head.next = cur.next
 
     def remove_back(self):
         """
         Removes the last element of the list. Will not remove the head.
         """
 
-        # FIXME: Write this function
+        cur = self.head
+        prev = None
+
+        # since it's single link we need to go through the list to find the last
+        # Node which points to the end of the list. We then set the previous to
+        # skip the last Node.
+        while cur.next != self.tail:
+            prev = cur
+            cur = cur.next
+
+        prev.next = self.tail
 
     def is_empty(self):
         """
@@ -446,4 +462,6 @@ ml.remove_link(0)
 print(ml.get_front())
 print(ml.get_back())
 # ml.remove_link(-20)
+ml.remove_front()
+ml.remove_back()
 print(ml.__str__())
