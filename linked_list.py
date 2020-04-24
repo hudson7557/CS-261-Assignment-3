@@ -172,7 +172,10 @@ class LinkedList:
             The data in the node at index 0 or None if there is no such node
         """
 
-        # FIXME: Write this function
+        if self.head.next == self.tail:
+            return None
+
+        return self.head.next.data
 
     def get_back(self):
         """
@@ -183,7 +186,17 @@ class LinkedList:
             The data in the node at last index of the list or None if there is no such node
         """
 
-        # FIXME: Write this function
+        if self.head.next == self.tail:
+            return None
+
+        cur = self.head
+        prev = None
+
+        while cur != self.tail:
+            prev = cur
+            cur = cur.next
+
+        return prev.data
 
     def remove_front(self):
         """
@@ -409,10 +422,8 @@ class CircularList:
         # FIXME: Write this function
 
 ml = LinkedList()
-
-
-
-
+print(ml.get_back())
+print(ml.get_front())
 ml.add_back('A')
 ml.add_front('Z')
 print(ml.__str__())
@@ -432,5 +443,7 @@ ml.add_back('A')
 print(ml.__str__())
 ml.remove_link(1)
 ml.remove_link(0)
+print(ml.get_front())
+print(ml.get_back())
 # ml.remove_link(-20)
 print(ml.__str__())
