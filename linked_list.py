@@ -236,7 +236,10 @@ class LinkedList:
             True if the list has no data nodes, False otherwise
         """
 
-        # FIXME: Write this function
+        if self.head.next == self.tail:
+            return True
+        else:
+            return False
 
     def contains(self, value):
         """
@@ -249,7 +252,18 @@ class LinkedList:
             True if value is in the list, False otherwise
         """
 
-        # FIXME: Write this function
+        cur = self.head
+
+        # sort through the list checking the data of each Node, if found return
+        # True.
+        while cur != self.tail:
+            if cur.data == value:
+                return True
+            cur = cur.next
+
+        # if the value is not found we return False.
+        else:
+            return False
 
     def remove(self, value):
         """
@@ -438,6 +452,7 @@ class CircularList:
         # FIXME: Write this function
 
 ml = LinkedList()
+print(ml.is_empty())
 print(ml.get_back())
 print(ml.get_front())
 ml.add_back('A')
@@ -461,6 +476,9 @@ ml.remove_link(1)
 ml.remove_link(0)
 print(ml.get_front())
 print(ml.get_back())
+print(ml.is_empty(), 'false')
+print(ml.contains('D'), 'false')
+print(ml.contains('C'), 'true')
 # ml.remove_link(-20)
 ml.remove_front()
 ml.remove_back()
