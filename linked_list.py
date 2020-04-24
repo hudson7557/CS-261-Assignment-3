@@ -7,11 +7,12 @@
 # ===================================================
 
 
-'''
+"""
 **********************************************************************************
 Part1: Deque and Bag implemented with Linked List
 **********************************************************************************
-'''
+"""
+
 
 class SLNode:
     def __init__(self):
@@ -44,7 +45,7 @@ class LinkedList:
             The string of the human readable list representation
         """
         out = '['
-        if self.head.next != self.tail:             
+        if self.head.next != self.tail:
             cur = self.head.next.next
             out = out + str(self.head.next.data)
             while cur != self.tail:
@@ -53,7 +54,6 @@ class LinkedList:
         out = out + ']'
         return out
 
-
     def add_link_before(self, data, index):
         """
         Adds a new link containing data and inserts it before the link at index.
@@ -61,12 +61,43 @@ class LinkedList:
 
         Args:
             data: The data the new node will contain
-            index: The index of the node that will immediately follow the newly added node
+            index: The index of the node that will immediately follow the newly
+            added node
         """
+        if index < 0:
+            raise Exception('Index out of range')
+
         new_link = SLNode()  # initialize a new link
         new_link.data = data  # set new_link data
 
-        # FIXME: Complete this function
+        # if the list is empty the node is just placed at the beginning
+        if self.head.next == self.tail:
+            new_link.next = self.tail
+            self.head.next = new_link
+            return
+
+        # if the index is 0 the new Node is placed at the start of the list.
+        if index == 0:
+            new_link.next = self.head.next
+            self.head.next = new_link
+            return
+
+        # inserts the node at the specified index
+        cur = self.head
+        prev = None
+
+        for number in range(index + 1):
+            # if the current Node ever becomes the tail sentinel we raise
+            # an index exception.
+            if cur == self.tail:
+                raise Exception('Index out of bounds')
+            prev = cur
+            cur = cur.next
+
+        # inserts the node in the list.
+        new_link.next = cur
+        prev.next = new_link
+        return
 
     def remove_link(self, index):
         """
@@ -86,8 +117,8 @@ class LinkedList:
         """
         new_link = SLNode()  # initialize a new link
         new_link.data = data  # set new_link data
-
-        # FIXME: Complete this function
+        new_link.next = self.head.next # set new_link next to the next Node
+        self.head.next = new_link # set the front sentinel to point to new_link
 
     def add_back(self, data):
         """
@@ -98,9 +129,18 @@ class LinkedList:
         """
         new_link = SLNode()  # initialize a new link
         new_link.data = data  # set new_link data
+        cur = self.head
+        prev = None
 
-        # FIXME: Complete this function
+        # since it's single link we need to go through the list to find the end
+        # not the most efficient. O(n)?
+        while cur != self.tail:
+            prev = cur
+            cur = cur.next
 
+        # once we've found the end of the list we insert our new_link
+        new_link.next = cur
+        prev.next = new_link
 
     def get_front(self):
         """
@@ -138,7 +178,6 @@ class LinkedList:
 
         # FIXME: Write this function
 
-
     def is_empty(self):
         """
         Checks if the list is empty
@@ -175,9 +214,10 @@ class LinkedList:
 
 '''
 **********************************************************************************
-Part 2: Deque implemented with CircularlyDoublyLinked List
+Part 2: 9898-465-7436 is the zoom meeting id 
 **********************************************************************************
 '''
+
 
 class DLNode:
     def __init__(self):
@@ -185,10 +225,12 @@ class DLNode:
         self.prev = None
         self.data = None
 
+
 class CircularList:
     def __init__(self, start_list=None):
         """
-        Initializes a linked list with a single sentinel node containing None data
+        Initializes a linked list with a single sentinel node containing None
+        data
         """
         self.sentinel = DLNode()
         self.sentinel.next = self.sentinel
@@ -210,7 +252,7 @@ class CircularList:
             The string of the human readable list representation
         """
         out = '['
-        if self.sentinel.prev != self.sentinel:             
+        if self.sentinel.prev != self.sentinel:
             cur = self.sentinel.next.next
             out = out + str(self.sentinel.next.data)
             while cur != self.sentinel:
@@ -226,7 +268,8 @@ class CircularList:
 
         Args:
             data: The data the new node will contain
-            index: The index of the node that will immediately follow the newly added node
+            index: The index of the node that will immediately follow the newly
+            added node
         """
         new_link = DLNode()  # initialize a new link
         new_link.data = data  # set new_link data
@@ -277,7 +320,6 @@ class CircularList:
 
         # FIXME: Write this function
 
-
     def get_back(self):
         """
         Returns the data in the element at the end of the list. Will return
@@ -289,14 +331,12 @@ class CircularList:
 
         # FIXME: Write this function
 
-
     def remove_front(self):
         """
         Removes the first element of the list. Will not remove the tail.
         """
 
         # FIXME: Write this function
-
 
     def remove_back(self):
         """
@@ -314,7 +354,6 @@ class CircularList:
         """
 
         # FIXME: Write this function
-
 
     def contains(self, value):
         """
@@ -341,9 +380,32 @@ class CircularList:
 
     def circularListReverse(self):
         """
-        Reverses the order of the links. It must not create any additional new links to do so.
-        (e.g. you cannot call DLNode()). If the list printed by following next was 0, 1, 2, 3,
-        after the call it will be 3,2,1,0
+        Reverses the order of the links. It must not create any additional new
+        links to do so. (e.g. you cannot call DLNode()). If the list printed by
+        following next was 0, 1, 2, 3, after the call it will be 3,2,1,0
         """
 
         # FIXME: Write this function
+
+ml = LinkedList()
+
+
+
+
+ml.add_back('A')
+ml.add_front('Z')
+print(ml.__str__())
+ml.add_link_before('A', 0)
+ml.add_link_before('B', 0)
+print(ml.__str__())
+ml.add_link_before('C', 1)
+print(ml.__str__())
+ml.add_link_before(80, 1)
+print(ml.__str__())
+ml.add_link_before(40, 2)
+print(ml.__str__())
+# ml.add_link_before(44, -1)
+# ml.add_link_before(44, 20)
+ml.add_front('A')
+ml.add_back('A')
+print(ml.__str__())
