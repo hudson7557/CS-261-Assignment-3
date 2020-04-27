@@ -138,8 +138,8 @@ class LinkedList:
         """
         new_link = SLNode()  # initialize a new link
         new_link.data = data  # set new_link data
-        new_link.next = self.head.next # set new_link next to the next Node
-        self.head.next = new_link # set the front sentinel to point to new_link
+        new_link.next = self.head.next  # set new_link next to the next Node
+        self.head.next = new_link  # set the front sentinel to point to new_link
 
     def add_back(self, data):
         """
@@ -183,7 +183,8 @@ class LinkedList:
         None in an empty list.
 
         Returns:
-            The data in the node at last index of the list or None if there is no such node
+            The data in the node at last index of the list or None if there is
+            no such node
         """
 
         if self.head.next == self.tail:
@@ -280,7 +281,6 @@ class LinkedList:
 
             # check each Node to see if it contains our target value
             if cur.data == value:
-
                 # if the value is found we change prev.next to point to skip the
                 # current Node.
                 prev.next = cur.next
@@ -375,7 +375,12 @@ class CircularList:
         new_link = DLNode()  # initialize a new link
         new_link.data = data  # set new_link data
 
-        # FIXME: Complete this function
+        new_link.prev = self.sentinel
+        new_link.next = self.sentinel.next
+        self.sentinel.prev = new_link
+        self.sentinel.next = new_link
+
+
 
     def add_back(self, data):
         """
@@ -467,4 +472,9 @@ class CircularList:
 
         # FIXME: Write this function
 
-
+dl = CircularList()
+print(dl.__str__())
+dl.add_front(80)
+dl.add_front(70)
+dl.add_front((60))
+print(dl.__str__())
