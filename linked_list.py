@@ -354,9 +354,6 @@ class CircularList:
         new_link = DLNode()  # initialize a new link
         new_link.data = data  # set new_link data
 
-        if self.sentinel.next == self.sentinel:
-            return False
-
         # handle an index out of range
         if index < 0:
             raise Exception('Index out of range')
@@ -367,7 +364,7 @@ class CircularList:
             new_link.next = self.sentinel.next
             self.sentinel.next.prev = new_link
             self.sentinel.next = new_link
-            return
+            return True
 
         # if the index is anything else
         cur = self.sentinel.next
@@ -599,7 +596,7 @@ class CircularList:
         prev = self.sentinel
         cur = self.sentinel.next
 
-        while cur != self.sentinel:
+        while cur.data != None:
             next_cur = cur.next  # stores the next node
 
             prev.next = prev.prev
@@ -613,3 +610,39 @@ class CircularList:
             """
         return self
 
+dl = CircularList()
+print(dl.is_empty(), True)
+print(dl.__str__(), '[]')
+print(dl.remove_front(), False)
+print(dl.remove_back(), False)
+print(dl.add_link_before(40, 0), 'feck')
+dl.add_front(80)
+print(dl.is_empty(), False)
+print(dl.__str__())
+dl.add_front(70)
+print(dl.__str__())
+dl.add_front(60)
+print(dl.__str__())
+dl.add_back(90)
+print(dl.__str__())
+print(dl.get_front(),
+      dl.get_back())
+print(dl.remove_front(), True)
+print(dl.remove_back(), True)
+print(dl.__str__())
+print(dl.contains(90), False)
+print(dl.contains(70), True)
+print(dl.remove(80),
+      dl.remove(90), 'Hello')
+dl.add_front(60)
+dl.add_back(80)
+dl.add_back(90)
+dl.remove_link(3)
+dl.remove_link(0)
+dl.add_link_before(50, 0)
+dl.add_link_before(60, 1)
+# dl.add_link_before(100, 40)
+print(dl.__str__())
+# dl.circularListReverse()
+
+print(dl.__str__())
