@@ -389,6 +389,8 @@ class CircularList:
             self.sentinel.next.prev = new_link
             self.sentinel.next = new_link
 
+        return
+
     def add_back(self, data):
         """
         Adds a new node at the end of the list that contains data
@@ -413,6 +415,8 @@ class CircularList:
             self.sentinel.prev.next = new_link
             self.sentinel.prev = new_link
 
+        return
+
     def get_front(self):
         """
         Returns the data in the element at the front of the list. Will return
@@ -422,7 +426,7 @@ class CircularList:
             The data in the node at index 0 or None if there is no such node
         """
 
-        # FIXME: Write this function
+        return self.sentinel.next.data
 
     def get_back(self):
         """
@@ -433,21 +437,33 @@ class CircularList:
             The data in the node at last index of the list or None if there is no such node
         """
 
-        # FIXME: Write this function
+        return self.sentinel.prev.data
 
     def remove_front(self):
         """
         Removes the first element of the list. Will not remove the tail.
         """
 
-        # FIXME: Write this function
+        if self.sentinel.next == self.sentinel:
+            return False
+        else:
+            self.sentinel.next.next.prev = self.sentinel
+            self.sentinel.next = self.sentinel.next.next
+
+            return True
 
     def remove_back(self):
         """
         Removes the last element of the list. Will not remove the head.
         """
 
-        # FIXME: Write this function
+        if self.sentinel.prev == self.sentinel:
+            return False
+        else:
+            self.sentinel.prev.prev.next = self.sentinel
+            self.sentinel.prev = self.sentinel.prev.prev
+
+            return True
 
     def is_empty(self):
         """
@@ -491,3 +507,21 @@ class CircularList:
 
         # FIXME: Write this function
 
+
+dl = CircularList()
+print(dl.__str__())
+print(dl.remove_front())
+print(dl.remove_back())
+dl.add_front(80)
+print(dl.__str__())
+dl.add_front(70)
+print(dl.__str__())
+dl.add_front(60)
+print(dl.__str__())
+dl.add_back(90)
+print(dl.__str__())
+print(dl.get_front(),
+      dl.get_back())
+print(dl.remove_front())
+print(dl.remove_back())
+print(dl.__str__())
