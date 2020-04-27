@@ -472,9 +472,3 @@ class CircularList:
 
         # FIXME: Write this function
 
-dl = CircularList()
-print(dl.__str__())
-dl.add_front(80)
-dl.add_front(70)
-dl.add_front((60))
-print(dl.__str__())
