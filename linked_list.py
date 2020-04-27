@@ -354,13 +354,39 @@ class CircularList:
         new_link = DLNode()  # initialize a new link
         new_link.data = data  # set new_link data
 
-        # FIXME: Complete this function
+        if self.sentinel.next == self.sentinel:
+            return False
+
+        # handle an index out of range
+        if index < 0:
+            raise Exception('Index out of range')
+
+        # if the index is zero the new node is inserted at the beginning.
+        if index == 0:
+            new_link.prev = self.sentinel
+            new_link.next = self.sentinel.next
+            self.sentinel.next.prev = new_link
+            self.sentinel.next = new_link
+            return
+
+        # if the index is anything else
+        cur = self.sentinel.next
+        for num in range(index):
+            cur = cur.next
+            if cur == self.sentinel:
+                # if the index is out of range we raise an exception
+                raise Exception('Index out of range')
+
+        new_link.prev = cur.prev
+        cur.prev.next = new_link
+        new_link.next = cur
+        cur.prev = new_link
 
     def remove_link(self, index):
         """
         Removes the link at the location specified by index
         Args:
-            Index: The index of the node that will be removed
+            index: The index of the node that will be removed
         """
         if self.sentinel.next == self.sentinel:
             return False
@@ -372,8 +398,8 @@ class CircularList:
         cur = self.sentinel.next
         for num in range(index):
             cur = cur.next
-            # if cur == self.sentinel:
-                # raise Exception('Index out of range')
+            if cur == self.sentinel:
+                raise Exception('Index out of range')
 
         # if the Node we are removing is not linked to the sentinel
         if cur.prev != self.sentinel and cur.next != self.sentinel:
@@ -466,7 +492,8 @@ class CircularList:
         None in an empty list.
 
         Returns:
-            The data in the node at last index of the list or None if there is no such node
+            The data in the node at last index of the list or None if there is
+            no such node
         """
 
         return self.sentinel.prev.data
@@ -568,7 +595,17 @@ class CircularList:
         links to do so. (e.g. you cannot call DLNode()). If the list printed by
         following next was 0, 1, 2, 3, after the call it will be 3,2,1,0
         """
+        prev = self.sentinel
+        cur = self.sentinel.next
 
-        # FIXME: Write this function
+        while cur != self.sentinel:
+            next_cur = cur.next  # stores the next node
 
+            prev.next = prev.prev
+            prev.prev = cur
+            cur.next = prev  # sets next to point backwards
+            cur.prev = cur.next
 
+            # I'm like 73% on why this worked...
+            prev = cur
+            cur = next_cur

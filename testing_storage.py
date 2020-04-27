@@ -20,12 +20,17 @@ print(dl.__str__())
 print(dl.contains(90), False)
 print(dl.contains(70), True)
 print(dl.remove(80),
-dl.remove(90), 'Hello')
+      dl.remove(90), 'Hello')
 dl.add_front(60)
 dl.add_back(80)
 dl.add_back(90)
 dl.remove_link(3)
 dl.remove_link(0)
+dl.add_link_before(50, 0)
+dl.add_link_before(60, 1)
+# dl.add_link_before(100, 40)
+print(dl.__str__())
+dl.circularListReverse()
 
 print(dl.__str__())
 
