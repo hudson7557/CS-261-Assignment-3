@@ -608,4 +608,5 @@ class CircularList:
             prev = cur
             cur = next_cur
 
-        return self
+        return
+
