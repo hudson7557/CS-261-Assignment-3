@@ -386,6 +386,7 @@ class CircularList:
         else:
             new_link.prev = self.sentinel
             new_link.next = self.sentinel.next
+            self.sentinel.next.prev = new_link
             self.sentinel.next = new_link
 
     def add_back(self, data):
@@ -398,7 +399,19 @@ class CircularList:
         new_link = DLNode()  # initialize a new link
         new_link.data = data  # set new_link data
 
-        # FIXME: Complete this function
+        # if the list is empty we set both next and prev on the sentinel
+        if self.sentinel.prev == self.sentinel:
+            new_link.prev = self.sentinel
+            new_link.next = self.sentinel.next
+            self.sentinel.prev = new_link
+            self.sentinel.next = new_link
+
+        # if the list isn't empty we just set next on the sentinel
+        else:
+            new_link.prev = self.sentinel.prev
+            new_link.next = self.sentinel
+            self.sentinel.prev.next = new_link
+            self.sentinel.prev = new_link
 
     def get_front(self):
         """
