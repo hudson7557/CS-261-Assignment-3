@@ -373,9 +373,9 @@ class CircularList:
         cur = self.sentinel.next
         for num in range(index):
             cur = cur.next
-            # if cur == self.sentinel:
+            if cur == self.sentinel:
                 # if the index is out of range we raise an exception
-                # raise Exception('Index out of range')
+                raise Exception('Index out of range')
 
         new_link.prev = cur.prev
         cur.prev.next = new_link
@@ -398,8 +398,8 @@ class CircularList:
         cur = self.sentinel.next
         for num in range(index):
             cur = cur.next
-            # if cur == self.sentinel:
-                # raise Exception('Index out of range')
+            if cur == self.sentinel:
+                raise Exception('Index out of range')
 
         # if the Node we are removing is not linked to the sentinel
         if cur.prev != self.sentinel and cur.next != self.sentinel:
@@ -589,13 +589,13 @@ class CircularList:
             cur = cur.next
         return False
 
-"""
-   def circularListReverse(self):
-
+    def circularListReverse(self):
+        """
         Reverses the order of the links. It must not create any additional new
         links to do so. (e.g. you cannot call DLNode()). If the list printed by
         following next was 0, 1, 2, 3, after the call it will be 3,2,1,0
-        
+        """
+        """
         prev = self.sentinel
         cur = self.sentinel.next
 
@@ -610,6 +610,6 @@ class CircularList:
             # I'm like 73% on why this worked...
             prev = cur
             cur = next_cur
+            """
+        return self
 
-        return
-"""
