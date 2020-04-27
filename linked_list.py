@@ -372,8 +372,8 @@ class CircularList:
         cur = self.sentinel.next
         for num in range(index):
             cur = cur.next
-            if cur == self.sentinel:
-                raise Exception('Index out of range')
+            # if cur == self.sentinel:
+                # raise Exception('Index out of range')
 
         # if the Node we are removing is not linked to the sentinel
         if cur.prev != self.sentinel and cur.next != self.sentinel:
@@ -571,4 +571,32 @@ class CircularList:
 
         # FIXME: Write this function
 
+dl = CircularList()
+print(dl.is_empty(), True)
+print(dl.__str__(), '[]')
+print(dl.remove_front(), False)
+print(dl.remove_back(), False)
+dl.add_front(80)
+print(dl.is_empty(), False)
+print(dl.__str__())
+dl.add_front(70)
+print(dl.__str__())
+dl.add_front(60)
+print(dl.__str__())
+dl.add_back(90)
+print(dl.__str__())
+print(dl.get_front(),
+      dl.get_back())
+print(dl.remove_front(), True)
+print(dl.remove_back(), True)
+print(dl.__str__())
+print(dl.contains(90), False)
+print(dl.contains(70), True)
+print(dl.remove(80),
+dl.remove(90), 'Hello')
+dl.add_front(60)
+dl.add_back(80)
+dl.add_back(90)
+dl.remove_link()
 
+print(dl.__str__())
