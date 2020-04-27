@@ -589,12 +589,13 @@ class CircularList:
             cur = cur.next
         return False
 
-    def circularListReverse(self):
-        """
+"""
+   def circularListReverse(self):
+
         Reverses the order of the links. It must not create any additional new
         links to do so. (e.g. you cannot call DLNode()). If the list printed by
         following next was 0, 1, 2, 3, after the call it will be 3,2,1,0
-        """
+        
         prev = self.sentinel
         cur = self.sentinel.next
 
@@ -611,3 +612,4 @@ class CircularList:
             cur = next_cur
 
         return
+"""
