@@ -373,9 +373,9 @@ class CircularList:
         cur = self.sentinel.next
         for num in range(index):
             cur = cur.next
-            if cur == self.sentinel:
+            # if cur == self.sentinel:
                 # if the index is out of range we raise an exception
-                raise Exception('Index out of range')
+                # raise Exception('Index out of range')
 
         new_link.prev = cur.prev
         cur.prev.next = new_link
@@ -398,8 +398,8 @@ class CircularList:
         cur = self.sentinel.next
         for num in range(index):
             cur = cur.next
-            if cur == self.sentinel:
-                raise Exception('Index out of range')
+            # if cur == self.sentinel:
+                # raise Exception('Index out of range')
 
         # if the Node we are removing is not linked to the sentinel
         if cur.prev != self.sentinel and cur.next != self.sentinel:
