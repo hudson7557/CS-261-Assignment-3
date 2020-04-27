@@ -364,7 +364,7 @@ class CircularList:
             new_link.next = self.sentinel.next
             self.sentinel.next.prev = new_link
             self.sentinel.next = new_link
-            return True
+            return
 
         # if the index is anything else
         cur = self.sentinel.next
@@ -643,6 +643,6 @@ dl.add_link_before(50, 0)
 dl.add_link_before(60, 1)
 # dl.add_link_before(100, 40)
 print(dl.__str__())
-# dl.circularListReverse()
+dl.circularListReverse()
 
 print(dl.__str__())
