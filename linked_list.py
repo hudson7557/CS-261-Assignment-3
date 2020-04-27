@@ -473,7 +473,10 @@ class CircularList:
             True if the list has no data nodes, False otherwise
         """
 
-        # FIXME: Write this function
+        if self.sentinel.next == self.sentinel:
+            return True
+        else:
+            return False
 
     def contains(self, value):
         """
@@ -486,7 +489,16 @@ class CircularList:
             True if value is in the list, False otherwise
         """
 
-        # FIXME: Write this function
+        if self.sentinel.next == self.sentinel:
+            return False
+        else:
+            cur = self.sentinel.next
+            while cur != self.sentinel:
+                if cur.data == value:
+                    return True
+                cur = cur.next
+
+            return False
 
     def remove(self, value):
         """
@@ -496,7 +508,27 @@ class CircularList:
             value: the value to remove
         """
 
-        # FIXME: Write this function
+        cur = self.sentinel.next
+        while cur != self.sentinel:
+            if cur.data == value:
+                if cur.prev != self.sentinel and cur.next != self.sentinel:
+                    cur.next.prev = cur.prev
+                    cur.prev.next = cur.next
+
+                # handles a value at the front of the list
+                if cur.prev == self.sentinel and cur.next != self.sentinel:
+                    self.sentinel.next = cur.next
+                    cur.next.prev = self.sentinel
+
+                # handles a value at the end of the list
+                if cur.prev != self.sentinel and cur.next == self.sentinel:
+                    self.sentinel.prev = cur.prev
+                    cur.prev.next = self.sentinel
+
+                return True
+
+            cur = cur.next
+        return False
 
     def circularListReverse(self):
         """
@@ -509,10 +541,12 @@ class CircularList:
 
 
 dl = CircularList()
-print(dl.__str__())
-print(dl.remove_front())
-print(dl.remove_back())
+print(dl.is_empty(), True)
+print(dl.__str__(), '[]')
+print(dl.remove_front(), False)
+print(dl.remove_back(), False)
 dl.add_front(80)
+print(dl.is_empty(), False)
 print(dl.__str__())
 dl.add_front(70)
 print(dl.__str__())
@@ -522,6 +556,15 @@ dl.add_back(90)
 print(dl.__str__())
 print(dl.get_front(),
       dl.get_back())
-print(dl.remove_front())
-print(dl.remove_back())
+print(dl.remove_front(), True)
+print(dl.remove_back(), True)
+print(dl.__str__())
+print(dl.contains(90), False)
+print(dl.contains(70), True)
+print(dl.remove(80),
+dl.remove(90), 'Hello')
+dl.add_front(60)
+dl.add_back(80)
+dl.add_back(90)
+
 print(dl.__str__())
