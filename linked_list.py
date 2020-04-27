@@ -391,7 +391,7 @@ class CircularList:
             self.sentinel.prev = cur.prev
 
         # if the list contains only one Node in it
-        else:
+        if cur.prev == self.sentinel and cur.next == self.sentinel:
             self.sentinel.prev = self.sentinel
             self.sentinel.next = self.sentinel
 
