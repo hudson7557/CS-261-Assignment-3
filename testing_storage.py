@@ -1,3 +1,12 @@
+dl = CircularList()
+print(dl.__str__())
+dl.add_front(80)
+print(dl.__str__())
+dl.add_front(70)
+print(dl.__str__())
+dl.add_front(60)
+print(dl.__str__())
+
 ml = LinkedList()
 print(ml.is_empty())
 print(ml.get_back())

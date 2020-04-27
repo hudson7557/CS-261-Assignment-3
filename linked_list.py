@@ -375,10 +375,15 @@ class CircularList:
         new_link = DLNode()  # initialize a new link
         new_link.data = data  # set new_link data
 
-        new_link.prev = self.sentinel
-        new_link.next = self.sentinel.next
-        self.sentinel.prev = new_link
-        self.sentinel.next = new_link
+        if self.sentinel.prev == self.sentinel:
+            new_link.prev = self.sentinel
+            new_link.next = self.sentinel.next
+            self.sentinel.prev = new_link
+            self.sentinel.next = new_link
+        else:
+            new_link.prev = self.sentinel
+            new_link.next = self.sentinel.next
+            self.sentinel.next = new_link
 
 
 
