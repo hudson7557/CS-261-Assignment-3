@@ -24,6 +24,9 @@ dl.remove(90), 'Hello')
 dl.add_front(60)
 dl.add_back(80)
 dl.add_back(90)
+dl.remove_link(2)
+
+print(dl.__str__())
 
 print(dl.__str__())
 
