@@ -362,7 +362,10 @@ class CircularList:
         Args:
             Index: The index of the node that will be removed
         """
-        # handle an index out of range.... ughhh probably need to work on the
+        if self.sentinel.next == self.sentinel:
+            return False
+
+        # handle an index out of range
         if index < 0:
             raise Exception('Index out of range')
 
@@ -371,8 +374,27 @@ class CircularList:
             cur = cur.next
             if cur == self.sentinel:
                 raise Exception('Index out of range')
-        cur.next.prev = cur.prev
-        cur.prev.next = cur.next
+
+        # if the Node we are removing is not linked to the sentinel
+        if cur.prev != self.sentinel and cur.next != self.sentinel:
+            cur.next.prev = cur.prev
+            cur.prev.next = cur.next
+
+        # if the Node we are removing is in the front of the DL list
+        if cur.prev == self.sentinel and cur.next != self.sentinel:
+            cur.next.prev = self.sentinel
+            self.sentinel.next = cur.next
+
+        # if the Node we are removing is in the back of the DL list
+        if cur.prev != self.sentinel and cur.next == self.sentinel:
+            cur.prev.next = self.sentinel
+            self.sentinel.prev = cur.prev
+
+        # if the list contains only one Node in it
+        else:
+            self.sentinel.prev = self.sentinel
+            self.sentinel.next = self.sentinel
+
         return True
 
     def add_front(self, data):
