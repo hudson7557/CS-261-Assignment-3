@@ -8,9 +8,9 @@
 
 
 """
-**********************************************************************************
+*******************************************************************************
 Part1: Deque and Bag implemented with Linked List
-**********************************************************************************
+*******************************************************************************
 """
 
 
@@ -72,7 +72,7 @@ class LinkedList:
         new_link = SLNode()  # initialize a new link
         new_link.data = data  # set new_link data
 
-        # if the list is empty the node is just placed at the beginning
+        # if the list is empty the node is placed at the beginning
         if self.head.next == self.tail:
             new_link.next = self.tail
             self.head.next = new_link
@@ -88,17 +88,22 @@ class LinkedList:
         cur = self.head
         prev = None
 
+        # moving through the list
         for number in range(index + 1):
+
             # if the current Node ever becomes the tail sentinel we raise
             # an index exception.
             if cur == self.tail:
                 raise Exception('Index out of bounds')
+
             prev = cur
             cur = cur.next
 
-        # inserts the node in the list.
+        # the for loop has targeted the correct index, we can now insert the
+        # node into the list.
         new_link.next = cur
         prev.next = new_link
+
         return
 
     def remove_link(self, index):
@@ -172,9 +177,11 @@ class LinkedList:
             The data in the node at index 0 or None if there is no such node
         """
 
+        # if the list is empty return None
         if self.head.next == self.tail:
             return None
 
+        # otherwise we return the data of the first Node.
         return self.head.next.data
 
     def get_back(self):
@@ -187,12 +194,15 @@ class LinkedList:
             no such node
         """
 
+        # if the list is empty returns None.
         if self.head.next == self.tail:
             return None
 
         cur = self.head
         prev = None
 
+        # flips through the list until the tail is reached and then returns the
+        # previous node
         while cur != self.tail:
             prev = cur
             cur = cur.next
@@ -206,11 +216,12 @@ class LinkedList:
 
         # if the list is empty nothing happens.
         if self.head.next == self.tail:
-            return
+            return False
 
         # change the next data members to point to skip the first Node
         cur = self.head.next
         self.head.next = cur.next
+        return True
 
     def remove_back(self):
         """
@@ -228,6 +239,7 @@ class LinkedList:
             cur = cur.next
 
         prev.next = self.tail
+        return
 
     def is_empty(self):
         """
@@ -237,8 +249,11 @@ class LinkedList:
             True if the list has no data nodes, False otherwise
         """
 
+        # returns true if the list is empty
         if self.head.next == self.tail:
             return True
+
+        # otherwise returns false
         else:
             return False
 
@@ -262,7 +277,7 @@ class LinkedList:
                 return True
             cur = cur.next
 
-        # if the value is not found we return False.
+        # if the value is not found return False.
         else:
             return False
 
@@ -293,9 +308,9 @@ class LinkedList:
 
 
 '''
-**********************************************************************************
+*******************************************************************************
 Part 2: 9898-465-7436 is the zoom meeting id 
-**********************************************************************************
+*******************************************************************************
 '''
 
 
@@ -567,6 +582,8 @@ class CircularList:
         cur = self.sentinel.next
         while cur != self.sentinel:
             if cur.data == value:
+
+                # handles a non-end value
                 if cur.prev != self.sentinel and cur.next != self.sentinel:
                     cur.next.prev = cur.prev
                     cur.prev.next = cur.next
@@ -593,15 +610,19 @@ class CircularList:
         following next was 0, 1, 2, 3, after the call it will be 3,2,1,0
         """
 
+        # set a base case where we are looking at the 1st and 2nd node
         cur = self.sentinel.next
         next_node = cur.next
 
+        # takes a Node and flips their prev and next values
         while cur != self.sentinel:
             cur.next = cur.prev
             cur.prev = next_node
             cur = next_node
             next_node = cur.next
 
+        # since hitting the sentinel is what stops the loop we have to
+        # manually set the prev and next values for sentinel to close the loop
         hold_me = cur.prev
         cur.prev = cur.next
         cur.next = hold_me
