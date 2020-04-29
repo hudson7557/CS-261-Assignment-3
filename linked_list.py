@@ -593,20 +593,16 @@ class CircularList:
         following next was 0, 1, 2, 3, after the call it will be 3,2,1,0
         """
 
-        prev = self.sentinel
         cur = self.sentinel.next
+        next_node = cur.next
 
-        while cur.data != None:
-            next_cur = cur.next  # stores the next node
+        while cur != self.sentinel:
+            cur.next = cur.prev
+            cur.prev = next_node
+            cur = next_node
+            next_node = cur.next
 
-            prev.next = prev.prev
-            prev.prev = cur
-            cur.next = prev  # sets next to point backwards
-            cur.prev = cur.next
-
-            # I'm like 73% on why this worked...
-            prev = cur
-            cur = next_cur
-
+        hold_me = cur.prev
+        cur.prev = cur.next
+        cur.next = hold_me
         return
-

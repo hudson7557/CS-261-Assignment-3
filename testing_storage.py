@@ -69,3 +69,21 @@ ml.remove_front()
 ml.remove_back()
 ml.remove('A')
 print(ml.__str__())
+
+while cur.data != None:
+      next_cur = cur.next  # stores the next node
+
+      prev.next = prev.prev
+      prev.prev = cur
+      cur.next = prev  # sets next to point backwards
+      cur.prev = next_cur
+
+      # I'm like 73% on why this worked...
+      prev = cur
+      cur = next_cur
+
+
+previous = cur.prev
+cur.prev = cur.next
+cur.next = previous
+cur = cur.prev
